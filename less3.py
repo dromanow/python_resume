@@ -125,34 +125,64 @@ class Order:
 t = [i for i in range(10)]
 
 
-def gen(x):
-    val = x
-    while True:
-        yield val * 2
-        # val += 1
+def gen():
+    for i in range(10):
+        val = yield i
+        print(i, val)
 
 
-gg = gen(10)
+# gg = gen()
+# next(gg)
+# next(gg)  # gg.send(None)
+# gg.send(10)
+# gg.send(30)
+# next(gg)
+
+
+class A:
+    def __init__(self):
+        self.val = None
+        self.i = 0
+
+    def gen(self):
+        temp = self.i
+        self.i += 1
+        return temp
+
+    def send(self, val):
+        self.val = val
+
+# zip
+# map
+# reduce
+
+
+a = [1, 2, 3]
+b = [4, 6]
+c = [8, 9, 10, 11]
+
+gg = zip(a, b, c)
+# print(next(gg))
+
+# print(list(zip(a, b, c)))
+
+# map/reduce
+
+gg = map(lambda x: x*x, c)
+
 print(next(gg))
-# print(next(gg))
-# print(next(gg))
-# print(next(gg))
-# print(next(gg))
-# print(next(gg))
-# print(next(gg))
-# print(next(gg))
-
-gg.send(30)
-print(next(gg))
 
 
+# from functools import reduce as functools_reduce
+import functools
+
+def reducer(el_prev, el):
+    import functools
+    print(el_prev, el)
+    return el_prev + el
 
 
-
-
-
-
-
+print(reduce(reducer, map(...)))
 
 
 
